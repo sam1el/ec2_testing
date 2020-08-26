@@ -1,0 +1,15 @@
+interval = 1500
+splay = 600
+splay_first_run = 600
+run_lock_timeout = 300
+log_level = "warn"
+ssl_verify_mode = ":verify_none"
+rubygems_url = "http://gems.example.com"
+
+[chef_license]
+acceptance = "accept"
+
+[automate]
+enable = true
+server_url = "https://chefauto-am2.aig.net/api/v0/events/data-collector"
+token = "jo4zvsnvv2r7x1lFTfJUJ45U3N4="

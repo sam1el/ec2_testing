@@ -1,0 +1,8 @@
+{
+  "job_type": "hab package",
+  "repo_name": "latest",
+  "publish_location": "http://bldrserver.com/v1/depot/pkgs/origin/package",
+  "bldrurl": "http://bldrurl.com",
+  "origin": "aig",
+  "version": "0.10.1"
+}

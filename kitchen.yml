@@ -1,0 +1,40 @@
+---
+driver:
+  name: ec2
+  retryable_tries: 120
+  retryable_sleep: 5
+  security_group_ids: ["sg-0e25a5a74789445c5"]
+  region: us-west-2
+  availability_zone: c
+  subnet_id: subnet-4dc71114
+  instance_type: t2.medium
+  associate_public_ip: false
+
+provisioner:
+  name: shell
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: Windows-2016-Core
+    driver:
+      image_id: ami-05a85a0ef116b177a
+      block_device_mappings:
+        - device_name: /dev/sda1
+          ebs:
+            volume_type: gp2
+            volume_size: 90
+            delete_on_termination: true
+    transport:
+      connection_timeout: 20
+      connection_retries: 15
+      transport_name: winrm
+    provisioner:
+      script: hab-build/hab-bootother.ps1
+    lifecycle:
+      pre_converge:
+      - remote: New-Item -ItemType Directory 'C:\temp' -ErrorAction SilentlyContinue ; echo <%= ENV['HAB_AUTH_TOKEN'] %> > 'C:\temp\authtoken'
+
+suites:
+  - name: habbuild
